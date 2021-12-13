@@ -12,7 +12,9 @@ export default {
     name: 'IntlSegmenterPolyfillBundled',
   },
   plugins: [
-    wasm(),
+    wasm({
+      sync: ['src/break_iterator.wasm']
+    }),
     babel({
       babelrc: false,
       babelHelpers: 'bundled',
