@@ -1,4 +1,4 @@
-FROM surferseo/emsdk
+FROM debian:buster as icu
 
 RUN apt-get update && apt-get install -y git
 
@@ -7,6 +7,9 @@ RUN git clone https://github.com/unicode-org/icu
 RUN cd /icu && git checkout bb7b8481bdce7eb8ac40b3dbfd0a567b3c754cd6
 RUN mv /icu/icu4c /icu/icu
 
+FROM surferseo/emsdk
+
+COPY --from=icu /icu /icu
 COPY ./build /build
 WORKDIR /build
 
